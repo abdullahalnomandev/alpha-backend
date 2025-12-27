@@ -12,7 +12,6 @@ export type IMemberShipApplication = {
   name: string;
   email: string;
   phone: string;
-  password: string; // store hashed password, remove confirmPassword from model
   membershipType: MembershipType;
   membershipStatus: MembershipStatus;
   expireId?: Date;   // new field for separate expiry date

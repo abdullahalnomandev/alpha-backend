@@ -1,6 +1,6 @@
 export enum MembershipType {
   ALPHA = "alpha",
-  ALPHA_FAMILY = "alpha-family"
+  ALPHA_FAMILY = "alpha_family"
 }
 
 export enum MembershipStatus {
