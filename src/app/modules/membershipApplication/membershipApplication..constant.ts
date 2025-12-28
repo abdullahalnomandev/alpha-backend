@@ -1,11 +1,20 @@
-export enum MembershipType {
-  ALPHA = "alpha",
-  ALPHA_FAMILY = "alpha_family"
-}
 
 export enum MembershipStatus {
-  PENDING = "PENDING",
-  ACTIVE = "ACTIVE",
-  REJECTED = "REJECTED"
+  PENDING = "pending",
+  ACTIVE = "active",
+  REJECTED = "rejected"
+}
+
+export enum FamilyMemberRelation {
+  SPOUSE = "spouse",
+  CHILD = "child",
+  PARENT = "parent",
+  SIBLING = "sibling",
+  GRANDPARENT = "grandparent",
+  GRANDCHILD = "grandchild",
+  IN_LAW = "in_law",
+  GUARDIAN = "guardian",
+  PARTNER = "partner",
+  OTHER = "other"
 }
 

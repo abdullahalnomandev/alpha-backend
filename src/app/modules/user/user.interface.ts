@@ -11,8 +11,7 @@ export type IUser = {
   status?: 'active' | 'block';
   role?: USER_ROLES;
   verified?: boolean;
-  preferences?: mongoose.ObjectId[];
-  restaurant_crowd_status?: 'normal' | 'high' | 'overloaded';
+  application_form:mongoose.ObjectId;
   authentication?: {
     isResetPassword?: boolean;
     oneTimeCode?: number | null;

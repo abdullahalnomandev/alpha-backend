@@ -260,7 +260,7 @@ const resetPasswordToDB = async (payload: IAuthResetPassword) => {
 
 
   // check user exists
-  const isExistUser = await User.findOne({ 'authentication.oneTimeCode': otp, 'authentication.isResetPassword': true })
+  const isExistUser = await User.findOne({ 'authentication.oneTimeCode': otp})
     .select('_id password')
     .lean();
   if (!isExistUser) {

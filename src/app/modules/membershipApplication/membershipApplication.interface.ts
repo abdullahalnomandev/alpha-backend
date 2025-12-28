@@ -1,27 +1,26 @@
 import { Model } from "mongoose";
-import { MembershipStatus, MembershipType } from "./membershipApplication..constant";
+import { FamilyMemberRelation, MembershipStatus } from "./membershipApplication..constant";
 
-export type IFamilyMember = {
-  name: string;
-  relation: string;
-};
 
 export type IMemberShipApplication = {
   _id?: string; // optional because Mongoose will generate it
-  memberShipId?: string; // AC-01144
+  memberShipId?: string; // AC-01144 (Auto Generated)
+  membershipType: string; // sink with others table
   name: string;
   email: string;
   phone: string;
-  membershipType: MembershipType;
+  address: string;
+
+  familyMembers?: Array<{
+    name: string;
+    relation: FamilyMemberRelation;
+  }>;
+
   membershipStatus: MembershipStatus;
   expireId?: Date;   // new field for separate expiry date
-
-  familyMembers?: IFamilyMember[]; // Added family members
 
   createdAt?: Date;
   updatedAt?: Date;
 };
 
-
 export type MemberShipApplicationModel = Model<IMemberShipApplication>;
-

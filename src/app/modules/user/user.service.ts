@@ -102,7 +102,7 @@ const getAllUsers = async (query: Record<string, any>) => {
 
 const getProfile = async (userId: string) => {
   const user = await User.findOne({ _id: userId })
-    .populate({ path: 'preferences', select: '_id name' })
+    .populate({ path: 'application_form' })
     .lean();
   if (!user) {
     throw new ApiError(500, "User not found");

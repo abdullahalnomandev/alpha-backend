@@ -35,22 +35,18 @@ const userSchema = new Schema<IUser, UserModal>(
     },
     role: {
       type: String,
-      default: USER_ROLES.USER
-    },
-    preferences: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Preference',
-        require:false
-      }
-    ],
-    restaurant_crowd_status: {
-      type: String,
-      enum: ['normal', 'high', 'overloaded']
+      enum: Object.values(USER_ROLES),
+      default: USER_ROLES.USER,
     },
     verified: {
       type: Boolean,
       default: false,
+    },
+    application_form: {
+      type: Schema.Types.ObjectId,
+      ref: 'MemberShipApplication',
+      required: true,
+      select: false,
     },
     authentication: {
       type: {
@@ -67,7 +63,7 @@ const userSchema = new Schema<IUser, UserModal>(
           default: null,
         },
       },
-      select: 0,
+      select: false,
     },
   },
   { timestamps: true }

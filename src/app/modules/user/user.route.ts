@@ -15,7 +15,7 @@ router
   })
   .patch(
     fileUploadHandler(),
-    auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.BUSINESS, USER_ROLES.USER),
+    auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER),
     (req: Request, res: Response, next: NextFunction) => {
       return UserController.updateUser(req, res, next);
     }
@@ -23,8 +23,8 @@ router
 
 
 router
-  .route('/me')
-  .get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.BUSINESS, USER_ROLES.USER),
+  .route('/my-profile')
+  .get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER),
     UserController.getProfile);
 
 

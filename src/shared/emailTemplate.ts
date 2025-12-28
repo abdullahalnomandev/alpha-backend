@@ -14,30 +14,30 @@ const resetPassWord = (values: ICreateAccount) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Verification Code</title>
 </head>
-<body style="font-family: 'Inter', Arial, sans-serif; background: #f7f8fa; margin: 0; padding: 0;">
-  <div style="max-width: 440px; margin: 40px auto; background: #111132; border-radius: 18px; padding: 38px 26px 32px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.13); text-align: center;">
+<body style="font-family: 'Inter', Arial, sans-serif; background: #f6f8fb; margin: 0; padding: 0;">
+  <div style="max-width: 470px; margin: 40px auto; background: #ffffff; border-radius: 18px; padding: 38px 28px 34px 28px; box-shadow: 0 8px 26px rgba(20,34,58,0.09); text-align: center;">
     <!-- Title -->
-    <h1 style="color: #fff; font-size: 22px; font-weight: 700; margin: 0 0 18px 0; letter-spacing: 0.5px;">
+    <h1 style="color: #194376; font-size: 22px; font-weight: 700; margin: 0 0 18px 0; letter-spacing: 0.2px;">
       Verification Code
     </h1>
     <!-- Greeting -->
-    <p style="color: #b3b3d1; font-size: 15px; margin: 0 0 22px 0; line-height: 1.6;">
-      Hi <strong style="color: #fff;">${values.name.split(' ')[0]}</strong>,
+    <p style="color: #33394d; font-size: 15px; margin: 0 0 22px 0; line-height: 1.6;">
+      Hi <strong style="color: #194376;">${values.name.split(' ')[0]}</strong>,
     </p>
     <!-- Message -->
-    <p style="color: #b3b3d1; font-size: 15px; margin: 0 0 30px 0; line-height: 1.6;">
-      Use the code below to securely sign in to your account.
+    <p style="color: #4a5874; font-size: 15px; margin: 0 0 28px 0; line-height: 1.7;">
+      Please use the verification code below to securely sign in to your account.
     </p>
     <!-- OTP Code Box -->
-    <div style="display: inline-block; background: #6C2FF9; color: #fff; font-size: 28px; font-weight: 700; letter-spacing: 8px; padding: 18px 0; width: 170px; border-radius: 12px; box-shadow: 0 2px 8px rgba(108,47,249,0.13); margin-bottom: 28px;">
+    <div style="display: inline-block; background: #295ec9; color: #fff; font-size: 28px; font-weight: 700; letter-spacing: 8px; padding: 18px 0; width: 170px; border-radius: 12px; box-shadow: 0 2px 8px rgba(41,94,201,0.11); margin-bottom: 28px;">
       ${values.otp}
     </div>
     <!-- Expiration Note -->
-    <p style="font-size: 13px; color: #9999b3; margin: 28px 0 0 0;">
-      This code will expire in <strong style="color: #fff;">3 minutes</strong>.
+    <p style="font-size: 13px; color: #74839b; margin: 28px 0 0 0;">
+      This code will expire in <strong style="color: #194376;">3 minutes</strong>.
     </p>
     <!-- Footer -->
-    <p style="font-size: 12px; color: #777799; margin: 22px 0 0 0; line-height: 1.6;">
+    <p style="font-size: 12px; color: #a8b3c5; margin: 22px 0 0 0; line-height: 1.6;">
       If you didn’t request this code, you can safely ignore this email.<br />
       For security reasons, do not share this code with anyone.
     </p>
@@ -49,8 +49,11 @@ const resetPassWord = (values: ICreateAccount) => {
   return data;
 };
 
-
-const verifyAccount = (values: { email: string, otp: number, name: string }) => {
+const verifyAccount = (values: {
+  email: string;
+  otp: number;
+  name: string;
+}) => {
   const data = {
     to: values.email,
     subject: 'Verify Your Account',
@@ -97,7 +100,162 @@ const verifyAccount = (values: { email: string, otp: number, name: string }) => 
   return data;
 };
 
+const membershipApproved = (values: {
+  email: string;
+  name: string;
+  password: string;
+  memberShipId: string;
+}) => {
+  const data = {
+    to: values.email,
+    subject: 'Membership Application Approved',
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Approved</title>
+</head>
+<body style="font-family: 'Inter', Arial, sans-serif; background: #f6f8fb; margin: 0; padding: 0;">
+  <div style="max-width: 470px; margin: 40px auto; background: #ffffff; border-radius: 18px; padding: 38px 28px 34px 28px; box-shadow: 0 8px 26px rgba(20,34,58,0.09); text-align: center;">
+    <!-- Title -->
+    <h1 style="color: #194376; font-size: 24px; font-weight: 700; margin: 0 0 20px 0; letter-spacing: 0.2px;">
+      🎉 Membership Approved!
+    </h1>
+    <!-- Greeting -->
+    <p style="color: #33394d; font-size: 15px; margin: 0 0 20px 0; line-height: 1.7;">
+      Hi <strong style="color: #194376;">${values.name.split(' ')[0]}</strong>,
+    </p>
+    <!-- Message -->
+    <p style="color: #4a5874; font-size: 15px; margin: 0 0 28px 0; line-height: 1.7;">
+      Congratulations! Your membership application has been approved.<br>Your account has been created successfully.
+    </p>
+    <!-- Membership ID -->
+    <div style="background: #f1f5fa; border-radius: 12px; padding: 18px 0 14px 0; margin-bottom: 22px; border: 1px solid #e3eafa;">
+      <p style="color: #74839b; font-size: 13px; margin: 0 0 5px 0;">Membership ID</p>
+      <p style="color: #295ec9; font-size: 18px; font-weight: 600; margin: 0; letter-spacing: 0.5px;">${values.memberShipId}</p>
+    </div>
+    <!-- Password Box -->
+    <div style="background: #f1f5fa; border-radius: 12px; padding: 18px 0 14px 0; margin-bottom: 22px; border: 1px solid #e3eafa;">
+      <p style="color: #74839b; font-size: 13px; margin: 0 0 5px 0;">Your Password</p>
+      <div style="background: #295ec9; color: #fff; font-size: 16px; font-weight: 700; padding: 10px 12px; border-radius: 8px; letter-spacing: 2px; word-break: break-all; display: inline-block;">
+        ${values.password}
+      </div>
+    </div>
+    <!-- Instructions -->
+    <p style="color: #5071b6; font-size: 14px; margin: 22px 0 0 0; line-height: 1.7;">
+      Please log in with your email and the password above.<br>We strongly recommend changing your password after your first login.
+    </p>
+    <!-- Footer -->
+    <p style="font-size: 12px; color: #a8b3c5; margin: 22px 0 0 0; line-height: 1.6;">
+      If you have any questions, please contact our support team.<br />
+      <span style="color:#194376;">Welcome to our community!</span>
+    </p>
+  </div>
+</body>
+</html>
+`,
+  };
+  return data;
+};
+
+const membershipRejected = (values: { email: string; name: string }) => {
+  const data = {
+    to: values.email,
+    subject: 'Membership Application Status Update',
+    html: `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Membership Application Status</title>
+</head>
+
+<body style="margin:0; padding:0; background:#f4f6f9; font-family: Inter, Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+        <table width="100%" cellpadding="0" cellspacing="0"
+          style="max-width:500px; background:#ffffff; border-radius:16px;
+          box-shadow:0 8px 22px rgba(0,0,0,0.08); padding:32px 26px;">
+
+          <!-- Header -->
+          <tr>
+            <td style="text-align:center;">
+              <h2 style="margin:0; font-size:22px; font-weight:700; color:#111827;">
+                Membership Application Update
+              </h2>
+              <p style="margin:8px 0 0; font-size:13px; color:#6b7280;">
+                Application Status
+              </p>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:22px 0;">
+              <div style="height:1px; background:#e5e7eb;"></div>
+            </td>
+          </tr>
+
+          <!-- Greeting -->
+          <tr>
+            <td>
+              <p style="margin:0 0 14px; font-size:15px; color:#374151;">
+                Hi <strong style="color:#111827;">${
+                  values.name.split(' ')[0]
+                }</strong>,
+              </p>
+
+              <p style="margin:0 0 18px; font-size:15px; line-height:1.6; color:#374151;">
+                Thank you for your interest in our membership program. We appreciate the time and effort you put into your application.
+              </p>
+
+              <p style="margin:0 0 24px; font-size:15px; line-height:1.6; color:#374151;">
+                After careful consideration, we regret to inform you that your membership application has not been approved at this time.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Info Box -->
+          <tr>
+            <td>
+              <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:16px;">
+                <p style="margin:0; font-size:14px; line-height:1.6; color:#4b5563;">
+                  If you have any questions or would like further clarification, please feel free to contact our support team.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding-top:26px;">
+              <p style="margin:0; font-size:13px; line-height:1.6; color:#6b7280; text-align:center;">
+                We appreciate your interest and encourage you to apply again in the future.
+                <br /><br />
+                Kind regards,<br />
+                <strong style="color:#111827;">Alpha Support Team</strong>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `,
+  };
+  return data;
+};
+
 export const emailTemplate = {
   resetPassWord,
   verifyAccount,
+  membershipApproved,
+  membershipRejected,
 };
