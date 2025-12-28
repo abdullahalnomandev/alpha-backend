@@ -4,6 +4,8 @@ import { UserRoutes } from '../app/modules/user/user.route';
 import { MemberShipPlanRoutes } from '../app/modules/membershipPlan/membershipPlan.route';
 import { MemberShipFeatureRoutes } from '../app/modules/membershipPlan/memberShipFeatures/memberShipFeatures.route';
 import { MemberShipApplicationRoutes } from '../app/modules/membershipApplication/membershipApplication.route';
+import { SponsorRoutes } from '../app/modules/sponsor/sponsor.route';
+import { PartnerOfferRoutes } from '../app/modules/partnerOffer/partnerOffer.route';
 const router = express.Router();
 
 const apiRoutes = [
@@ -26,6 +28,14 @@ const apiRoutes = [
   {
     path: '/membership-application',
     route: MemberShipApplicationRoutes,
+  },
+  {
+    path: '/sponsor',
+    route: SponsorRoutes,
+  },
+  {
+    path: '/partner-offer',
+    route: PartnerOfferRoutes,
   },
 ];
 
