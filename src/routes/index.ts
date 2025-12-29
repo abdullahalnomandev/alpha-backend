@@ -6,6 +6,10 @@ import { MemberShipFeatureRoutes } from '../app/modules/membershipPlan/memberShi
 import { MemberShipApplicationRoutes } from '../app/modules/membershipApplication/membershipApplication.route';
 import { SponsorRoutes } from '../app/modules/sponsor/sponsor.route';
 import { PartnerOfferRoutes } from '../app/modules/partnerOffer/partnerOffer.route';
+import { ClubRoutes } from '../app/modules/club/club.route';
+import { StoryRoutes } from '../app/modules/stories/stories.route';
+import { ExclusiveOfferRoutes } from '../app/modules/exclusiveOffer/exclusiveOffer.route';
+import { CategoryRoutes } from '../app/modules/exclusiveOffer/category/category.route';
 const router = express.Router();
 
 const apiRoutes = [
@@ -36,6 +40,22 @@ const apiRoutes = [
   {
     path: '/partner-offer',
     route: PartnerOfferRoutes,
+  },
+  {
+    path: '/club',
+    route: ClubRoutes,
+  },
+  {
+    path: '/stories',
+    route: StoryRoutes,
+  },
+  {
+    path: '/exclusive-offer',
+    route: ExclusiveOfferRoutes,
+  },
+  {
+    path: '/category',
+    route: CategoryRoutes,
   },
 ];
 
