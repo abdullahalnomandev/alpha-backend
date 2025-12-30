@@ -30,13 +30,26 @@ router
   .patch(
     fileUploadHandler(),
     validateRequest(ExclusiveOfferValidation.updateZodSchema),
-    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN,USER_ROLES.USER),
+    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.USER),
     ExclusiveOfferController.update
   )
   .delete(
-    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN,USER_ROLES.USER),
+    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.USER),
     ExclusiveOfferController.remove
   );
 
-export const ExclusiveOfferRoutes = router;
+router
+  .route('/favourite/:id')
+  .post(
+    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.USER),
+    ExclusiveOfferController.createFavorite
+  );
 
+router
+  .route('/all/favourite')
+  .get(
+    auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.USER),
+    ExclusiveOfferController.getFavourites
+  );
+
+export const ExclusiveOfferRoutes = router;

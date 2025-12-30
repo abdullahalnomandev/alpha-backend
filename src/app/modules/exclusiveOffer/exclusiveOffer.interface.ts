@@ -14,6 +14,10 @@ export type IExclusiveOffer = {
   image?: string;                           // Exclusive offer image
   description?: string;                     // Exclusive offer description
   category?: Types.ObjectId;                // Reference to Category
+  discount?: {
+    enable: boolean;
+    value: number;
+  };
   createdAt?: Date;
   updatedAt?: Date;
 };

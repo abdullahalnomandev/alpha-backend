@@ -16,6 +16,7 @@ const exclusiveOfferSchema = new Schema<IExclusiveOffer, ExclusiveOfferModel>(
       required: true,
       trim: true,
     },
+    
     address: {
       type: String,
       trim: true,
@@ -38,6 +39,10 @@ const exclusiveOfferSchema = new Schema<IExclusiveOffer, ExclusiveOfferModel>(
     description: {
       type: String,
       trim: true,
+    },
+    discount: {
+      enable: { type: Boolean, default: false },
+      value: { type: Number, default: 0 },
     },
     category: {
       type: Schema.Types.ObjectId,

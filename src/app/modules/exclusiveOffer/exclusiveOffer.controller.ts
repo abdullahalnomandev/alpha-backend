@@ -23,14 +23,15 @@ const create = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAll = catchAsync(async (req: Request, res: Response) => {
-  const result = await ExclusiveOfferService.getAllFromDB(req.query);
+  const result = await ExclusiveOfferService.getAllFromDB(req.query,req?.user?.id as string);
   
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
     message: 'Exclusive offers retrieved successfully',
-    pagination: result.pagination,
-    data: result.data,
+    //@ts-ignore
+    pagination: result?.data,
+    // pagination: result.pagination,
   });
 });
 
@@ -75,11 +76,48 @@ const remove = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createFavorite = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?._id || req.user?.id; // assuming req.user is populated by auth middleware
+  const exclusiveOfferId = req.params?.id;
+
+  const result = await ExclusiveOfferService.createFavourite({
+    user: userId,
+    exclusiveOffer: exclusiveOfferId,
+  });
+
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: 'Exclusive offer added to favorites successfully',
+    data: result,
+  });
+});
+
+const getFavourites = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?._id || req.user?.id;
+  
+  if (!userId) {
+    throw new Error('User ID not found');
+  }
+
+  const result = await ExclusiveOfferService.getFavouritesFromDB(userId, req.query);
+  
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: 'Favourite exclusive offers retrieved successfully',
+    pagination: result.pagination,
+    data: result.data,
+  });
+});
+
 export const ExclusiveOfferController = {
   create,
   getAll,
   getById,
   update,
   remove,
+  createFavorite,
+  getFavourites,
 };
 
