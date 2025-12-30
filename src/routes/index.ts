@@ -10,6 +10,7 @@ import { ClubRoutes } from '../app/modules/club/club.route';
 import { StoryRoutes } from '../app/modules/stories/stories.route';
 import { ExclusiveOfferRoutes } from '../app/modules/exclusiveOffer/exclusiveOffer.route';
 import { CategoryRoutes } from '../app/modules/exclusiveOffer/category/category.route';
+import { EventRoutes } from '../app/modules/event/event.route';
 const router = express.Router();
 
 const apiRoutes = [
@@ -56,6 +57,10 @@ const apiRoutes = [
   {
     path: '/category',
     route: CategoryRoutes,
+  },
+  {
+    path: '/event',
+    route: EventRoutes,
   },
 ];
 
