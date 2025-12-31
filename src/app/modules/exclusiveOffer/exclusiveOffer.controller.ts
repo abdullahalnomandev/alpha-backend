@@ -94,7 +94,7 @@ const createFavorite = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getFavourites = catchAsync(async (req: Request, res: Response) => {
-  const userId = req.user?._id || req.user?.id;
+  const userId = req.user?.id;
   
   if (!userId) {
     throw new Error('User ID not found');
