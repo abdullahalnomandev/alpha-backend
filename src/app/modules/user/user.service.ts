@@ -8,6 +8,8 @@ import { IUser } from './user.interface';
 import { User } from './user.model';
 import QueryBuilder from '../../builder/QueryBuilder';
 import { userSearchableField } from './user.constant';
+import { Event } from '../event/event.model';
+import { ExclusiveOffer } from '../exclusiveOffer/exclusiveOffer.model';
 
 
 
@@ -110,9 +112,81 @@ const getProfile = async (userId: string) => {
   return user;
 };
 
+
+
+
+
+const getStatistics = async (year?: string) => {
+  // Get total counts
+  const totalUser = await User.countDocuments();
+  const totalEvent = await Event.countDocuments();
+  const totalExclusiveOffer = await ExclusiveOffer.countDocuments();
+
+  // Determine the year to use
+  const targetYear = year ? parseInt(year) : new Date().getFullYear();
+  const startDate = new Date(targetYear, 0, 1); // January 1st of the year
+  const endDate = new Date(targetYear, 11, 31, 23, 59, 59, 999); // December 31st of the year
+
+  // Get user statistics by month for the specified year
+  const userStats = await User.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: { $month: '$createdAt' },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
+  ]);
+
+  // Create a map of month number to count
+  const monthMap = new Map<number, number>();
+  userStats.forEach((stat) => {
+    monthMap.set(stat._id, stat.count);
+  });
+
+  // Format as month names (jan, feb, mar, etc.)
+  const monthNames = [
+    'jan',
+    'feb',
+    'mar',
+    'apr',
+    'may',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
+  ];
+
+  const userStatistics: Record<string, number> = {};
+  monthNames.forEach((month, index) => {
+    userStatistics[month] = monthMap.get(index + 1) || 0;
+  });
+
+  return {
+    totalUser,
+    totalEvent,
+    totalExclusiveOffer,
+    year: targetYear,
+    userStatistics,
+  };
+};
 export const UserService = {
   createUserToDB,
   getAllUsers,
   updateUserToDB,
-  getProfile
+  getProfile,
+  getStatistics
 };

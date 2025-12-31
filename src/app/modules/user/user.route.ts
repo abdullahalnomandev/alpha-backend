@@ -19,14 +19,19 @@ router
     (req: Request, res: Response, next: NextFunction) => {
       return UserController.updateUser(req, res, next);
     }
-  )
-
+  );
 
 router
   .route('/my-profile')
-  .get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER),
-    UserController.getProfile);
+  .get(
+    auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER),
+    UserController.getProfile
+  );
 
-
+router
+  .route('/statistics')
+  .get(
+    auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER),
+  UserController.getStatistics);
 
 export const UserRoutes = router;
