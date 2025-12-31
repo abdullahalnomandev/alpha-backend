@@ -73,10 +73,24 @@ const getProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getStatistics = catchAsync(async (req: Request, res: Response) => {
+  const year = req.query.year as string | undefined;
+  
+  const result = await UserService.getStatistics(year);
+  
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: 'Statistics retrieved successfully',
+    data: result,
+  });
+});
+
 
 export const UserController = {
   updateUser,
   createNewUser,
   getAllUsers,
-  getProfile
+  getProfile,
+  getStatistics
 };

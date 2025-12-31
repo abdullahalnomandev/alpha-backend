@@ -11,6 +11,7 @@ import { StoryRoutes } from '../app/modules/stories/stories.route';
 import { ExclusiveOfferRoutes } from '../app/modules/exclusiveOffer/exclusiveOffer.route';
 import { CategoryRoutes } from '../app/modules/exclusiveOffer/category/category.route';
 import { EventRoutes } from '../app/modules/event/event.route';
+import { SettingsRoutes } from '../app/modules/settings/settings.route';
 const router = express.Router();
 
 const apiRoutes = [
@@ -61,6 +62,10 @@ const apiRoutes = [
   {
     path: '/event',
     route: EventRoutes,
+  },
+  {
+    path: '/settings',
+    route: SettingsRoutes,
   },
 ];
 
